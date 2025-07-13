@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Malla Curricular Interactiva - Nutrición</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1600px;
+      margin: auto;
+    }
+    .año {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .año h2 {
+      text-align: center;
+      color: #444;
+    }
+    .ramo {
+      padding: 1rem;
+      background: #fff;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      user-select: none;
+    }
+    .ramo.bloqueado {
+      background: #eee;
+      color: #999;
+      border-style: dashed;
+      cursor: not-allowed;
+    }
+    .ramo.aprobado {
+      background: #c8e6c9;
+      color: #333;
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Malla Curricular Interactiva - Lic. en Nutrición</h1>
+
+<div class="grid">
+  <div class="año" id="anio1">
+    <h2>1º Año</h2>
+  </div>
+  <div class="año" id="anio2">
+    <h2>2º Año</h2>
+  </div>
+  <div class="año" id="anio3">
+    <h2>3º Año</h2>
+  </div>
+  <div class="año" id="anio4">
+    <h2>4º Año</h2>
+  </div>
+  <div class="año" id="anio5">
+    <h2>5º Año</h2>
+  </div>
+</div>
+
+<script>
+  const ramos = [
+    // 1° Año
+    { id: '701', nombre: 'SEMINARIO I', depende: [], anio: 1 },
+    { id: '702', nombre: 'QUÍMICA BIOLÓGICA', depende: [], anio: 1 },
+    { id: '703', nombre: 'ANATOMÍA Y FISIOLOGÍA', depende: [], anio: 1 },
+    { id: '704', nombre: 'FUNDAMENTOS DE LA PRÁCTICA EDUCATIVA', depende: [], anio: 1 },
+    { id: '705', nombre: 'ALIMENTOS', depende: [], anio: 1 },
+    { id: '706', nombre: 'SOCIOLOGÍA Y ANTROPOLOGÍA NUTRICIONAL', depende: ['701'], anio: 1 },
+    { id: '707', nombre: 'ESTADÍSTICA DESCRIPTIVA', depende: ['701'], anio: 1 },
+
+    // 2° Año
+    { id: '708', nombre: 'FISIOPATOLOGÍA', depende: ['702','703'], anio: 2 },
+    { id: '709', nombre: 'FISIOLOGÍA Y FISIOPATOLOGÍA DEL NIÑO Y LA EMBARAZADA', depende: ['702','703'], anio: 2 },
+    { id: '710', nombre: 'TÉCNICA DIETÉTICA', depende: ['702','705'], anio: 2 },
+    { id: '711', nombre: 'MICROBIOLOGÍA DE LOS ALIMENTOS', depende: ['702','705'], anio: 2 },
+    { id: '712', nombre: 'NUTRICIÓN BÁSICA', depende: ['702','703','705'], anio: 2 },
+    { id: '713', nombre: 'ALIMENTACIÓN NORMAL', depende: ['712'], anio: 2 },
+    { id: '714', nombre: 'EVALUACIÓN DEL ESTADO NUTRICIONAL', depende: ['712'], anio: 2 },
+    { id: '715', nombre: 'BIOESTADÍSTICA', depende: ['707'], anio: 2 },
+    { id: '716', nombre: 'COMUNICACIÓN EN NUTRICIÓN', depende: ['704','705','706'], anio: 2 },
+
+    // 3° Año
+    { id: '717', nombre: 'EDUCACIÓN ALIMENTARIA Y NUTRICIONAL', depende: ['701','702','703','704','705','706','707','710','716'], anio: 3 },
+    { id: '718', nombre: 'DIETOTERAPIA ADULTO', depende: ['701','702','703','704','705','706','707','708','710','713','714'], anio: 3 },
+    { id: '719', nombre: 'TÉCNICA DIETOTERÁPICA', depende: ['701','702','703','704','705','706','707','708','710','713','714'], anio: 3 },
+    { id: '720', nombre: 'EPIDEMIOLOGÍA NUTRICIONAL', depende: ['701','702','703','704','705','706','707','708','711','715'], anio: 3 },
+    { id: '721', nombre: 'ECONOMÍA ALIMENTARIA', depende: ['701','702','703','704','705','706','707','712','713'], anio: 3 },
+    { id: '722', nombre: 'NUTRICIÓN Y DESARROLLO SOCIAL', depende: ['701','702','703','704','705','706','707','716'], anio: 3 },
+    { id: '723', nombre: 'PRINCIPIOS DE ADMINISTRACIÓN', depende: ['701','702','703','704','705','706','707','715','721'], anio: 3 },
+
+    // 4° Año
+    { id: '724', nombre: 'SEMINARIO II', depende: ['708','709','710','711','712','713','714','715','716','717','718','719','720','721','722','723'], anio: 4 },
+    { id: '725', nombre: 'DIETOTERAPIA PEDIÁTRICA', depende: ['708','709','710','711','712','713','714','715','716','718','719'], anio: 4 },
+    { id: '726', nombre: 'ADM. SERV. DE ALIMENTACIÓN', depende: ['708','709','710','711','712','713','714','715','716','717','718','719','721','723'], anio: 4 },
+    { id: '727', nombre: 'NUTRICIÓN PÚBLICA', depende: ['708','709','710','711','712','713','714','715','716','717','720','721','722','723'], anio: 4 },
+    { id: '728', nombre: 'CIENCIA Y TEC. DE LOS ALIMENTOS', depende: ['708','709','710','711','712','713','714','715','716'], anio: 4 },
+    { id: '729', nombre: 'SALUD MATERNO INFANTIL', depende: ['708','709','710','711','712','713','714','715','716','720','721','723'], anio: 4 },
+    { id: '730', nombre: 'METODOLOGÍA DE LA INVESTIGACIÓN', depende: ['708','709','710','711','712','713','714','715','716','720','722'], anio: 4 },
+    { id: '731', nombre: 'INGLÉS TÉCNICO', depende: ['708','709','710','711','712','713','714','715','716','717','718','720'], anio: 4 },
+
+    // 5° Año
+    { id: '732', nombre: 'OPTATIVA I (GENÉRICA)', depende: [], anio: 5 },
+    { id: '733', nombre: 'SEMINARIO DE TESIS', depende: ['734'], anio: 5 },
+    { id: '734', nombre: 'SEMINARIO III', depende: ['724','725','726','727','728','729','730','731'], anio: 5 },
+    { id: '735', nombre: 'PRÁCTICA INTEGRAL', depende: ['701','702','703','704','705','706','707','708','709','710','711','712','713','714','715','716','717','718','719','720','721','722','723','724','725','726','727','728','729','730','731','733','734'], anio: 5 },
+    { id: '736', nombre: 'TESIS', depende: ['701','702','703','704','705','706','707','708','709','710','711','712','713','714','715','716','717','718','719','720','721','722','723','724','725','726','727','728','729','730','731','733','734','735'], anio: 5 },
+  ];
+
+  const estado = {};
+
+  function crearRamo(ramo) {
+    const div = document.createElement('div');
+    div.classList.add('ramo');
+    div.id = ramo.id;
+    div.textContent = `${ramo.nombre}`;
+
+    if (ramo.depende.length > 0) {
+      div.classList.add('bloqueado');
+    }
+
+    div.addEventListener('click', () => {
+      if (div.classList.contains('bloqueado')) return;
+
+      div.classList.add('aprobado');
+      div.classList.remove('bloqueado');
+      estado[ramo.id] = true;
+
+      ramos.forEach(r => {
+        if (!estado[r.id]) {
+          const deps = r.depende;
+          const cumplido = deps.every(d => estado[d]);
+          if (cumplido) {
+            const desbloquear = document.getElementById(r.id);
+            desbloquear.classList.remove('bloqueado');
+          }
+        }
+      });
+    });
+
+    return div;
+  }
+
+  ramos.forEach(r => {
+    const container = document.getElementById(`anio${r.anio}`);
+    container.appendChild(crearRamo(r));
+  });
+</script>
+
+</body>
+</html>
