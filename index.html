@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Malla Curricular Interactiva - Nutrición</title>
+  <meta charset="UTF-8">
+  <title>Malla Interactiva - Nutrición</title>
   <style>
-    /* Mantengo el CSS que ya tenés, colores naranja y verde, estilos para .ramo, .aprobado y .bloqueado */
     body {
       font-family: Arial, sans-serif;
       background-color: #fffaf0;
@@ -33,7 +32,7 @@
       border: 2px solid #ffcc80;
       border-radius: 10px;
       padding: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
     .año h2 {
       text-align: center;
@@ -87,7 +86,6 @@
 <body>
 
 <h1>Malla Curricular Interactiva - Lic. en Nutrición</h1>
-
 <div class="grid">
   <div class="año" id="anio1"><h2>1º Año</h2></div>
   <div class="año" id="anio2"><h2>2º Año</h2></div>
@@ -98,48 +96,85 @@
 
 <script>
   const ramos = [
-    // 1er Año
-    { id: "701", nombre: "SEMINARIO I: PROBLEMÁTICA SANITARIA Y SOCIOECONÓMICA REGIONAL DEL NOA", anio: 1, depende: [] },
-    { id: "702", nombre: "QUÍMICA BIOLÓGICA", anio: 1, depende: [] },
-    { id: "703", nombre: "ANATOMÍA Y FISIOLOGÍA", anio: 1, depende: [] },
-    { id: "704", nombre: "FUNDAMENTOS DE LA PRÁCTICA EDUCATIVA", anio: 1, depende: [] },
-    { id: "705", nombre: "ALIMENTOS", anio: 1, depende: [] },
-    { id: "706", nombre: "SOCIOLOGÍA Y ANTROPOLOGÍA NUTRICIONAL", anio: 1, depende: ["701"] },
-    { id: "707", nombre: "ESTADÍSTICA DESCRIPTIVA", anio: 1, depende: ["701"] },
+    { id: "701", nombre: "SEMINARIO I", anio:1, depende:[] },
+    { id: "702", nombre: "QUÍMICA BIOLÓGICA", anio:1, depende:[] },
+    { id: "703", nombre: "ANATOMÍA Y FISIOLOGÍA", anio:1, depende:[] },
+    { id: "704", nombre: "FUNDAMENTOS DE LA PRÁCTICA EDUCATIVA", anio:1, depende:[] },
+    { id: "705", nombre: "ALIMENTOS", anio:1, depende:[] },
+    { id: "706", nombre: "SOCIOLOGÍA Y ANTROPOLOGÍA NUTRICIONAL", anio:1, depende:["701"] },
+    { id: "707", nombre: "ESTADÍSTICA DESCRIPTIVA", anio:1, depende:["701"] },
 
-    // 2do Año
-    { id: "708", nombre: "FISIOPATOLOGÍA", anio: 2, depende: ["702", "703"] },
-    { id: "709", nombre: "FISIOLOGÍA Y FISIOPATOLOGÍA DEL NIÑO Y LA EMBARAZADA", anio: 2, depende: ["702", "703"] },
-    { id: "710", nombre: "TÉCNICA DIETÉTICA", anio: 2, depende: ["702", "705"] },
-    { id: "711", nombre: "MICROBIOLOGÍA DE LOS ALIMENTOS", anio: 2, depende: ["702", "705"] },
-    { id: "712", nombre: "NUTRICIÓN BÁSICA", anio: 2, depende: ["702", "703", "705"] },
-    { id: "713", nombre: "ALIMENTACIÓN NORMAL", anio: 2, depende: ["712"] },
-    { id: "714", nombre: "EVALUACIÓN DEL ESTADO NUTRICIONAL", anio: 2, depende: ["712"] },
-    { id: "715", nombre: "BIOESTADÍSTICA", anio: 2, depende: ["707"] },
-    { id: "716", nombre: "COMUNICACIÓN EN NUTRICIÓN", anio: 2, depende: ["704", "705", "706"] },
+    { id: "708", nombre: "FISIOPATOLOGÍA", anio:2, depende:["702","703"] },
+    { id: "709", nombre: "FISIOLOGÍA Y FISIOPATOLOGÍA DEL NIÑO Y LA EMBARAZADA", anio:2, depende:["702","703"] },
+    { id: "710", nombre: "TÉCNICA DIETÉTICA", anio:2, depende:["702","705"] },
+    { id: "711", nombre: "MICROBIOLOGÍA DE LOS ALIMENTOS", anio:2, depende:["702","705"] },
+    { id: "712", nombre: "NUTRICIÓN BÁSICA", anio:2, depende:["702","703","705"] },
+    { id: "713", nombre: "ALIMENTACIÓN NORMAL", anio:2, depende:["712"] },
+    { id: "714", nombre: "EVALUACIÓN DEL ESTADO NUTRICIONAL", anio:2, depende:["712"] },
+    { id: "715", nombre: "BIOESTADÍSTICA", anio:2, depende:["707"] },
+    { id: "716", nombre: "COMUNICACIÓN EN NUTRICIÓN", anio:2, depende:["704","705","706"] },
 
-    // 3er Año
-    { id: "717", nombre: "EDUCACIÓN ALIMENTARIA Y NUTRICIONAL", anio: 3, depende: ["701", "702", "703", "704", "705", "706", "707", "710", "716"] },
-    { id: "718", nombre: "DIETOTERAPIA Y PRÁCTICA HOSPITALARIA DEL ADULTO", anio: 3, depende: ["701", "702", "703", "704", "705", "706", "707", "708", "710", "713", "714"] },
-    { id: "719", nombre: "TÉCNICA DIETOTERÁPICA", anio: 3, depende: ["701", "702", "703", "704", "705", "706", "707", "708", "710", "713", "714"] },
-    { id: "720", nombre: "EPIDEMIOLOGÍA NUTRICIONAL", anio: 3, depende: ["701", "702", "703", "704", "705", "706", "707", "708", "711", "715"] },
-    { id: "721", nombre: "ECONOMÍA ALIMENTARIA", anio: 3, depende: ["701", "702", "703", "704", "705", "706", "707", "712", "713"] },
-    { id: "722", nombre: "NUTRICIÓN Y DESARROLLO SOCIAL", anio: 3, depende: ["701", "702", "703", "704", "705", "706", "707", "716"] },
-    { id: "723", nombre: "PRINCIPIOS DE ADMINISTRACIÓN", anio: 3, depende: ["701", "702", "703", "704", "705", "706", "707", "715", "721"] },
+    { id: "717", nombre: "EDUCACIÓN ALIMENTARIA Y NUTRICIONAL", anio:3, depende:["701","702","703","704","705","706","707","710","716"] },
+    { id: "718", nombre: "DIETOTERAPIA ADULTO", anio:3, depende:["701","702","703","704","705","706","707","708","710","713","714"] },
+    { id: "719", nombre: "TÉCNICA DIETOTERÁPICA", anio:3, depende:["701","702","703","704","705","706","707","708","710","713","714"] },
+    { id: "720", nombre: "EPIDEMIOLOGÍA NUTRICIONAL", anio:3, depende:["701","702","703","704","705","706","707","708","711","715"] },
+    { id: "721", nombre: "ECONOMÍA ALIMENTARIA", anio:3, depende:["701","702","703","704","705","706","707","712","713"] },
+    { id: "722", nombre: "NUTRICIÓN Y DESARROLLO SOCIAL", anio:3, depende:["701","702","703","704","705","706","707","716"] },
+    { id: "723", nombre: "PRINCIPIOS DE ADMINISTRACIÓN", anio:3, depende:["701","702","703","704","705","706","707","715","721"] },
 
-    // 4to Año
-    { id: "724", nombre: "SEMINARIO II: ATENCIÓN NUTRICIONAL CENTRADA EN EL PACIENTE", anio: 4, depende: ["708","709","710","711","712","713","714","715","716","717","718","719","720","721","722","723"] },
-    { id: "725", nombre: "DIETOTERAPIA PEDIÁTRICA", anio: 4, depende: ["708","709","710","711","712","713","714","715","716","718","719"] },
-    { id: "726", nombre: "ADMINISTRACIÓN DE SERVICIOS DE ALIMENTACIÓN", anio: 4, depende: ["708","709","710","711","712","713","714","715","716","717","718","719","721","723"] },
-    { id: "727", nombre: "NUTRICIÓN PÚBLICA", anio: 4, depende: ["708","709","710","711","712","713","714","715","716","717","720","721","722","723"] },
-    { id: "728", nombre: "CIENCIA Y TECNOLOGÍA DE LOS ALIMENTOS", anio: 4, depende: ["708","709","710","711","712","713","714","715","716"] },
-    { id: "729", nombre: "SALUD MATERNO INFANTIL", anio: 4, depende: ["708","709","710","711","712","713","714","715","716","720","721","723"] },
-    { id: "730", nombre: "METODOLOGÍA DE LA INVESTIGACIÓN CIENTÍFICA", anio: 4, depende: ["708","709","710","711","712","713","714","715","716","720","722"] },
-    { id: "731", nombre: "INGLÉS TÉCNICO", anio: 4, depende: ["708","709","710","711","712","713","714","715","716","717","718","720"] },
-    { id: "732", nombre: "OPTATIVA I (GENÉRICA)", anio: 4, depende: ["708","709","710","711","712","713","714","715","716","717","718","719","720","721","722","723"] },
+    { id: "724", nombre: "SEMINARIO II", anio:4, depende:["708","709","710","711","712","713","714","715","716","717","718","719","720","721","722","723"] },
+    { id: "725", nombre: "DIETOTERAPIA PEDIÁTRICA", anio:4, depende:["708","709","710","711","712","713","714","715","716","718","719"] },
+    { id: "726", nombre: "ADM SERVICIOS ALIMENTACIÓN", anio:4, depende:["708","709","710","711","712","713","714","715","716","717","718","719","721","723"] },
+    { id: "727", nombre: "NUTRICIÓN PÚBLICA", anio:4, depende:["708","709","710","711","712","713","714","715","716","717","720","721","722","723"] },
+    { id: "728", nombre: "CIENCIA Y TECNOLOGÍA ALIMENTOS", anio:4, depende:["708","709","710","711","712","713","714","715","716"] },
+    { id: "729", nombre: "SALUD MATERNO INFANTIL", anio:4, depende:["708","709","710","711","712","713","714","715","716","720","721","723"] },
+    { id: "730", nombre: "METODOLOGÍA INVESTIGACIÓN", anio:4, depende:["708","709","710","711","712","713","714","715","716","720","722"] },
+    { id: "731", nombre: "INGLÉS TÉCNICO", anio:4, depende:["708","709","710","711","712","713","714","715","716","717","718","720"] },
 
-    // 5to Año
-    { id: "733", nombre: "SEMINARIO DE TESIS", anio: 5, depende: [] },
-    { id: "734", nombre: "SEMINARIO III: ATENCIÓN NUTRICIONAL EN COMUNIDADES", anio: 5, depende: ["724","725","726","727","728","729","730","731"] },
-    { id: "735", nombre: "PRÁCTICA INTEGRAL", anio: 5, depende: ["701","702","703","704","705","706","707","708","709","710","711","712","713","714","715","716","717","718","719","720","721","722","723","724","725","726","727","728","729","730","731","732","733","734"] },
-    { id: "736", nombre: "TESIS", anio: 5, depende: ["701","702","703","704","705","706","707","708","709","710","711","712","713","]()
+    { id: "732", nombre: "OPTATIVA I (GENÉRICA)", anio:5, depende:[] },
+    { id: "733", nombre: "SEMINARIO DE TESIS", anio:5, depende:["734"] },
+    { id: "734", nombre: "SEMINARIO III", anio:5, depende:["724","725","726","727","728","729","730","731"] },
+    { id: "735", nombre: "PRÁCTICA INTEGRAL", anio:5, depende:["701","702","703","704","705","706","707","708","709","710","711","712","713","714","715","716","717","718","719","720","721","722","723","724","725","726","727","728","729","730","731","733","734"] },
+    { id: "736", nombre: "TESIS", anio:5, depende:["701","702","703","704","705","706","707","708","709","710","711","712","713","714","715","716","717","718","719","720","721","722","723","724","725","726","727","728","729","730","731","733","734","735"] }
+  ];
+
+  const estado = {};
+
+  function crearRamo(ramo) {
+    const div = document.createElement('div');
+    div.classList.add('ramo');
+    div.id = ramo.id;
+    div.textContent = ramo.nombre;
+    if (ramo.depende.length) div.classList.add('bloqueado');
+
+    div.addEventListener('click', () => {
+      if (div.classList.contains('bloqueado')) return;
+      if (div.classList.contains('aprobado')) {
+        div.classList.remove('aprobado');
+        estado[ramo.id] = false;
+        ramos.forEach(r => {
+          if (r.depende.includes(ramo.id)) {
+            const el = document.getElementById(r.id);
+            el?.classList.add('bloqueado');
+            estado[r.id] = false;
+          }
+        });
+      } else {
+        div.classList.add('aprobado');
+        estado[ramo.id] = true;
+        ramos.forEach(r => {
+          if (!estado[r.id] && r.depende.every(d => estado[d])) {
+            document.getElementById(r.id).classList.remove('bloqueado');
+          }
+        });
+      }
+    });
+    return div;
+  }
+
+  ramos.forEach(r => {
+    document.getElementById(`anio${r.anio}`).appendChild(crearRamo(r));
+  });
+</script>
+</body>
+</html>
